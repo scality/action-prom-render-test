@@ -1,0 +1,45 @@
+name: Render and test
+description: 'Render and check alerts'
+author: Scality
+inputs:
+  alert_file_path:
+    description: path of the alert to render and test
+    required: true
+  test_file_path:
+    description: path of the unit test file for alerts
+    required: true
+  alert_inputs:
+    description: a string with the alert inputs in the fomr "-i a=b,c=d"
+    required: true
+  artifact_username:
+    description: the artifact user name
+    required: true
+  artifact_password:
+    description: the artifact password
+    required: true
+  artifact_build_name:
+    description: the name of the artifacts to retrieve the binary alertgen
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Pull alertgen tool
+      shell: bash
+      run: >
+        curl --fail -L -s -q -O
+        -u ${{ inputs.artifact_username }}:${{ inputs.artifact_password}}
+        https://artifacts.scality.net/builds/${{ inputs.artifact_build_name }}/alertgen
+
+    - name: Set exucte flag
+      shell: bash
+      run: chmod +x ./alertgen
+
+    - name: Render alert
+      shell: bash
+      run: >
+        ./alertgen ${{ inputs.alert_file_path }} -i ${{ inputs.alert_inputs }}
+    - name: Test alert
+      shell: bash
+      run: |
+        docker run --rm -t -v ${PWD}/:/tests/ --entrypoint=promtool prom/prometheus:v2.33.4 test rules /tests/${{ inputs.test_file_path }}

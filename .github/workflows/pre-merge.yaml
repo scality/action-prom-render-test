@@ -1,0 +1,19 @@
+name: Run render
+
+on:
+  push
+
+jobs:
+  run-alert-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Render and test
+        uses: ./
+        with:
+          alert_file_path: alerts.yaml
+          test_file_path: alerts.test.yaml
+          alert_inputs: namespace=zenko,service=artesca-data-base-queue-headless,pvc=artesca-data-base-queue,cluster=artesca-data-base-queue,replicas=3
+          artifact_username: ${{ secrets.ARTIFACTS_USER }}
+          artifact_password: ${{ secrets.ARTIFACTS_PASSWORD }}
+          artifact_build_name: github:scality:zenko-operator:staging-ad7cabcfb6.tests.642.1
