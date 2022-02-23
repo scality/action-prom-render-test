@@ -1,0 +1,12 @@
+name: Run render
+
+on:
+  push
+
+jobs:
+  release-manager:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: render
+        uses: ./.github/actions/
