@@ -49,6 +49,8 @@ tests:
               description: 'Kafka: Broker count is 0'
             exp_labels:
               severity: critical
+              namespace: zenko
+              service: artesca-data-base-queue-headless
 
   # ActiveControllerCritical
   ##################################################################################################

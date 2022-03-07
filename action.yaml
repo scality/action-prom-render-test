@@ -9,7 +9,7 @@ inputs:
     description: path of the unit test file for alerts
     required: true
   alert_inputs:
-    description: a string with the alert inputs in the form "-i a=b,c=d"
+    description: a string with the alert inputs in the form "namespace=tesla,service=falcon9"
     required: true
   artifact_username:
     description: the artifact user name

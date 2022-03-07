@@ -11,8 +11,8 @@ jobs:
       - name: Render and test
         uses: ./
         with:
-          alert_file_path: alerts.yaml
-          test_file_path: alerts.test.yaml
+          alert_file_path: tests/alerts.yaml
+          test_file_path: tests/alerts.test.yaml
           alert_inputs: namespace=zenko,service=artesca-data-base-queue-headless,pvc=artesca-data-base-queue,cluster=artesca-data-base-queue,replicas=3
           artifact_username: ${{ secrets.ARTIFACTS_USER }}
           artifact_password: ${{ secrets.ARTIFACTS_PASSWORD }}
