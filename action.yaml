@@ -31,7 +31,7 @@ runs:
         -u ${{ inputs.artifact_username }}:${{ inputs.artifact_password}}
         https://artifacts.scality.net/builds/${{ inputs.artifact_build_name }}/alertgen
 
-    - name: Set exucte flag
+    - name: Set execute flag
       shell: bash
       run: chmod +x ./alertgen
 
