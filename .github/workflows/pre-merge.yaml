@@ -16,4 +16,4 @@ jobs:
           alert_inputs: namespace=zenko,service=artesca-data-base-queue-headless,pvc=artesca-data-base-queue,cluster=artesca-data-base-queue,replicas=3
           artifact_username: ${{ secrets.ARTIFACTS_USER }}
           artifact_password: ${{ secrets.ARTIFACTS_PASSWORD }}
-          artifact_build_name: github:scality:zenko-operator:staging-ad7cabcfb6.tests.642.1
+          artifact_build_name: github:scality:zenko-operator:staging-952a9b1a4c.tests.657.1
