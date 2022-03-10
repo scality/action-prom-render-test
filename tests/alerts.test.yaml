@@ -38,6 +38,8 @@ tests:
       - alertname: BrokersCountCritical
         eval_time: 3m
         exp_alerts: []
+        # this alert disapears because not more metrics are available
+        # so the function `count` will return nothing (no value).
       - alertname: BrokersCountWarning
         eval_time: 3m
         exp_alerts: []
