@@ -11,14 +11,8 @@ inputs:
   alert_inputs:
     description: a string with the alert inputs in the form "namespace=tesla,service=falcon9"
     required: true
-  artifact_username:
-    description: the artifact user name
-    required: true
-  artifact_password:
-    description: the artifact password
-    required: true
-  artifact_build_name:
-    description: the name of the artifacts to retrieve the binary alertgen
+  github_token:
+    description: Github secret token to pull alertgen tool
     required: true
 
 runs:
@@ -26,10 +20,9 @@ runs:
   steps:
     - name: Pull alertgen tool
       shell: bash
-      run: >
-        curl --fail -L -s -q -O
-        -u ${{ inputs.artifact_username }}:${{ inputs.artifact_password}}
-        https://artifacts.scality.net/builds/${{ inputs.artifact_build_name }}/alertgen
+      run: gh release download -p 'alertgen'
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
 
     - name: Set execute flag
       shell: bash
