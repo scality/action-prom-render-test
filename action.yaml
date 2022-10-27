@@ -20,7 +20,7 @@ runs:
   steps:
     - name: Pull alertgen tool
       shell: bash
-      run: gh release download -R scality/action-prom-render-test -p 'alertgen'
+      run: gh release download -R scality/action-prom-render-test -p 'alertgen' --skip-existing
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
 
