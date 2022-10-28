@@ -30,8 +30,10 @@ runs:
 
     - name: Render alert
       shell: bash
-      run: >
-        ./alertgen ${{ inputs.alert_file_path }} -i ${{ inputs.alert_inputs }}
+      run: |
+        INPUTS=$(cat <<< "${{ inputs.alert_inputs }}" | awk '{$1=$1};1' | sed -n '/^ *[^#]/p' | paste -sd "," -)
+        ./alertgen "${{ inputs.alert_file_path }}" -i "$INPUTS"
+
     - name: Test alert
       shell: bash
       run: |

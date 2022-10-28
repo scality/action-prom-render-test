@@ -8,10 +8,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Render and test
+      - name: Render and test - single line
         uses: ./
         with:
           alert_file_path: tests/alerts.yaml
           test_file_path: tests/alerts.test.yaml
           alert_inputs: namespace=zenko,service=artesca-data-base-queue-headless,pvc=artesca-data-base-queue,cluster=artesca-data-base-queue,replicas=3
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Render and test - multi line
+        uses: ./
+        with:
+          alert_file_path: tests/alerts.yaml
+          test_file_path: tests/alerts.test.yaml
+          alert_inputs: |
+            namespace=zenko
+            service=artesca-data-base-queue-headless
+            # yeah, can put comments too!!
+            pvc=artesca-data-base-queue
+            cluster=artesca-data-base-queue
+            replicas=3
           github_token: ${{ secrets.GITHUB_TOKEN }}
